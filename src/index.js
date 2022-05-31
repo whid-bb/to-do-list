@@ -1,7 +1,7 @@
-import ToDoList from "./js/ToDoList";
+import ToDoList from './js/ToDoList';
 
 const ToDo = new ToDoList({
-  listTag: 'add-task-li'
-})
+  listTag: 'add-task-li',
+});
 
-ToDo.init()
+ToDo.init();
