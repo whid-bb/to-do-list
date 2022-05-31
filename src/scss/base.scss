@@ -1,4 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap');
+@import 'list';
+
 * {
   margin: 0;
   padding: 0;
+}
+
+:root {
+  --main-grey: rgb(146, 146, 146);
+  --main-grey-rgb: 146, 146, 146;
+  --grey-light: rgb(236, 236, 236);
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  min-height: 100vh;
+  position: relative;
+}
+
+button {
+  background: 0;
+  border: 0;
+  cursor: pointer;
 }
