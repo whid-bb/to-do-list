@@ -1,6 +1,6 @@
-# Awesome Books Project
+# To Do List
 
-Set up an awesome book application from where a user can add and remove books from the list of books.
+Simple To Do List to remember about your daily tasks
 
 ## Built With
 
