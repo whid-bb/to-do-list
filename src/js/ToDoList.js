@@ -1,57 +1,33 @@
+import RenderList from './RenderList.js';
+
 class ToDoList {
-  list = []
+  list = [];
 
-  constructor({ listTag }) {
-    this.listTag = document.getElementById(listTag);
-  }
-
-  renderList = () => {
-    let html = `
-    
-    `;
-
-    this.list.forEach((el) => {
-      html += `
-      <li>
-      <div class="tdl-li-content">
-        <div class="tdl-li-content-inner">
-          <input type="checkbox" class="tdl-checkbox" ${el.completed ? 'checked' : ''}>
-          <span class="list-desc">${el.desc}</span>
-        </div>
-        <span class="dragndrop-ico"></span>
-      </div>
-    </li>
-      `;
+  constructor({ listTag, form: { tag, inputName } }) {
+    const listKey = 'toDoList';
+    this.form = { tag, inputName };
+    this.RenderList = new RenderList({
+      listTag: document.querySelector(listTag),
+      listKey,
     });
-
-    this.listTag.insertAdjacentHTML('afterend', html);
   }
+
+  parseForm = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const inputData = formData.get(this.form.inputName);
+    if (inputData.trim().length > 0) {
+      this.RenderList.render(inputData);
+    }
+    event.target.reset();
+  };
 
   init = () => {
-    this.list.push(
-      {
-        index: '1',
-        desc: 'First item',
-        completed: 0,
-      },
-      {
-        index: '2',
-        desc: 'Second item',
-        completed: 0,
-      },
-      {
-        index: '3',
-        desc: 'third item',
-        completed: 1,
-      },
-      {
-        index: '4',
-        desc: 'fourth item',
-        completed: 0,
-      },
-    );
-    this.renderList();
-  }
+    const formEl = document.querySelector(this.form.tag);
+
+    this.RenderList.render();
+    formEl.addEventListener('submit', this.parseForm);
+  };
 }
 
 export default ToDoList;
