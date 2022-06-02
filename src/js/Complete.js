@@ -4,19 +4,16 @@ import RemoveItems from './Remove.js';
 
 class Complete {
   Ls = new Ls();
+
   RemoveItems = new RemoveItems();
 
-  clearCompleted = (list) => {
+  clearCompleted = () => {
     document.querySelectorAll(`.${globals.TASK_LIST_COMPLETED}`).forEach((el) => {
-
       this.RemoveItems.removeItem(el);
     });
-    return;
   };
 
   taskComplete = (parent, id, list) => {
-    let checked = 1;
-
     list.map((el) => {
       if (Number(id) === el.index) {
         if (el.completed === 1) {

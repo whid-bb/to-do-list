@@ -1,14 +1,12 @@
-class Ls {
-  constructor(lsKey) {
-    this.lsKey = lsKey;
-  }
+import * as globals from './globals.js';
 
+class Ls {
   addToLS = (obj) => {
-    localStorage.setItem(this.lsKey, JSON.stringify(obj));
+    localStorage.setItem(globals.LS_KEY, JSON.stringify(obj));
   };
 
   getFromLS = () => {
-    const lsData = localStorage.getItem(this.lsKey);
+    const lsData = localStorage.getItem(globals.LS_KEY);
     if (lsData) {
       const data = JSON.parse(lsData);
       return data;
@@ -18,7 +16,7 @@ class Ls {
   };
 
   removeFromLS = (id) => {
-    const data = this.getFromLS(this.lsKey);
+    const data = this.getFromLS(globals.LS_KEY);
     data.filter((el, i) => {
       if (el.index === Number(id)) {
         data.splice(i, 1);

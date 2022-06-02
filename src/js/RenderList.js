@@ -1,23 +1,23 @@
 import ListItem from './ListItem.js';
 import Ls from './Ls.js';
+import * as globals from './globals.js';
 
 class RenderList extends Ls {
   list = [];
 
   taskListItem = 'task-list-item';
 
-  taskListCompleted = 'task-list-completed';
+  constructor({ listTag }) {
+    super();
+    this.listTags = listTag;
 
-  constructor({ listTag, listKey }) {
-    super(listKey);
-    this.listTag = listTag;
-    this.ListItem = new ListItem(listKey);
+    this.ListItem = new ListItem();
   }
 
   renderTemplate = (obj) => {
     const checkBoxCls = 'tdl-checkbox';
     const html = `
-    <li id="task-${obj.index}" class="${this.taskListItem}${obj.completed ? ` ${this.taskListCompleted}` : ''}">
+    <li id="task-${obj.index}" class="${this.taskListItem}${obj.completed ? ` ${globals.TASK_LIST_COMPLETED}` : ''}">
     <div class="tdl-li-content">
       <div class="tdl-li-content-inner">
         <input type="checkbox" class="${checkBoxCls}" ${obj.completed ? 'checked' : ''}>
@@ -28,28 +28,30 @@ class RenderList extends Ls {
     </div>
     </li>
     `;
-    this.listTag.insertAdjacentHTML('afterend', html);
+    this.listTags.insertAdjacentHTML('afterend', html);
   };
 
-  render = (one = null) => {
+  renderOne = (text) => {
+    this.list.push({
+      index: this.list.length,
+      desc: text,
+      completed: 0,
+    });
+    this.addToLS(this.list);
+    this.renderTemplate(this.list.at(-1));
+
+    const lastInsertId = this.list.at(-1).index;
+    this.ListItem.listItemEvent(this.list, lastInsertId);
+  };
+
+  renderMany = () => {
     this.list = this.getFromLS();
     const { list } = this;
-    if (one) {
-      list.push({
-        index: list.length,
-        desc: one,
-        completed: 0,
-      });
-      this.addToLS(list);
-      this.renderTemplate(list.at(-1), list);
-      this.ListItem.listItemEvents(this.list, 'one');
-      return;
-    }
+
     if (list.length === 0) return;
     list.forEach((el) => {
       this.renderTemplate(el, list);
     });
-
     this.ListItem.listItemEvents(this.list);
   };
 }

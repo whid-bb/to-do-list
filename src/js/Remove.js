@@ -1,22 +1,18 @@
-import Ls from './Ls';
+import Ls from './Ls.js';
 
 class RemoveItems extends Ls {
   list = this.getFromLS();
+
   recalculateIndexes = () => {
     const listItems = [...document.querySelectorAll('.task-list-item')];
 
-    // console.log(list);
     const listReverse = listItems.reverse();
-    // console.log(list);
 
     for (let i = 0; i <= listReverse.length - 1; i += 1) {
-      const el = listReverse;
-
       this.list[i].index = i;
       listReverse[i].id = `task-${i}`;
     }
-    console.log(listReverse);
-    console.log(this.list);
+
     this.addToLS(this.list);
   };
 
