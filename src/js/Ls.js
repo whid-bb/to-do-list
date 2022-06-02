@@ -7,8 +7,8 @@ class Ls {
     localStorage.setItem(this.lsKey, JSON.stringify(obj));
   };
 
-  getFromLS = (key) => {
-    const lsData = localStorage.getItem(key);
+  getFromLS = () => {
+    const lsData = localStorage.getItem(this.lsKey);
     if (lsData) {
       const data = JSON.parse(lsData);
       return data;
@@ -20,7 +20,7 @@ class Ls {
   removeFromLS = (id) => {
     const data = this.getFromLS(this.lsKey);
     data.filter((el, i) => {
-      if (el.id === Number(id)) {
+      if (el.index === Number(id)) {
         data.splice(i, 1);
         this.addToLS(data);
       }
