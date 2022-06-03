@@ -21,11 +21,13 @@ class ListItem extends Ls {
 
     const dragIco = e.currentTarget.querySelector('.dragndrop-ico');
     const trashIco = e.currentTarget.querySelector('.trash-ico');
+    this.list = this.getFromLS();
 
     trashIco.currentParentEl = e.currentTarget;
     trashIco.currentParentId = numId;
     trashIco.addEventListener('click', (e) => {
-      this.RemoveItems.removeItem(e.target, this.list);
+      this.RemoveItems.removeItem(e.target);
+      // this.RemoveItems.recalculateIndexes();
     });
 
     if (e.target.classList.contains('list-desc')) {
@@ -59,12 +61,12 @@ class ListItem extends Ls {
     listItem.addEventListener('click', this.edit);
     const checkbox = listItem.querySelector('.tdl-checkbox');
     checkbox.addEventListener('change', () => {
-      this.Complete.taskComplete(listItem, id, list);
+      this.Complete.taskComplete(listItem, id);
     });
+
   };
 
   listItemEvents = (list) => {
-    this.list = list;
     const listItems = document.querySelectorAll('.task-list-item');
 
     listItems.forEach((el) => {
@@ -76,7 +78,8 @@ class ListItem extends Ls {
     checkbox.forEach((el) => {
       el.addEventListener('change', (e) => {
         const parent = e.target.closest('.task-list-item');
-        this.Complete.taskComplete(parent, parent.id.replace('task-', ''), this.list);
+        const id = parent.id.replace('task-', '');
+        this.Complete.taskComplete(parent, id, list);
       });
     });
   };

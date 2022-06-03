@@ -32,6 +32,7 @@ class RenderList extends Ls {
   };
 
   renderOne = (text) => {
+    this.list = this.getFromLS();
     this.list.push({
       index: this.list.length,
       desc: text,
@@ -50,7 +51,7 @@ class RenderList extends Ls {
 
     if (list.length === 0) return;
     list.forEach((el) => {
-      this.renderTemplate(el, list);
+      this.renderTemplate(el);
     });
     this.ListItem.listItemEvents(this.list);
   };
