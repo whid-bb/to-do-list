@@ -29,11 +29,12 @@ class ListItem extends Ls {
       this.RemoveItems.removeItem(e.target);
       // this.RemoveItems.recalculateIndexes();
     });
-
     if (e.target.classList.contains('list-desc')) {
       e.currentTarget.style.backgroundColor = '#ccc';
       const descText = e.target.innerText;
-      e.target.outerHTML = `<input type='text' class='list-desc-edit' value='${descText}'>`;
+      e.target.parentNode.innerHTML = `<input type='text' class='list-desc-edit' value='${descText}'>
+      <span class="edit-item-prompt">Click input to save</span>
+      `;
 
       const tempInput = e.currentTarget.querySelector('.list-desc-edit');
       const endOfText = tempInput.value.length;
@@ -41,6 +42,7 @@ class ListItem extends Ls {
       tempInput.focus();
       this.toggleIcons('hide', dragIco, trashIco);
     }
+
     if (e.target.classList.contains('list-desc-edit')) {
       e.currentTarget.style.backgroundColor = 'unset';
       const descText = e.target.value;
@@ -50,7 +52,8 @@ class ListItem extends Ls {
         }
         return el;
       });
-      e.target.outerHTML = `<span class="list-desc">${descText}</span>`;
+
+      e.target.parentNode.innerHTML = `<span class="list-desc">${descText}</span>`;
       this.addToLS(this.list);
       this.toggleIcons('hide', dragIco, trashIco);
     }

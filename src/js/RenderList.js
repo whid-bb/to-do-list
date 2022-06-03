@@ -21,7 +21,9 @@ class RenderList extends Ls {
     <div class="tdl-li-content">
       <div class="tdl-li-content-inner">
         <input type="checkbox" class="${checkBoxCls}" ${obj.completed ? 'checked' : ''}>
+        <div class="list-desc-container">
         <span class="list-desc" contenteditable="false">${obj.desc}</span>
+        </div>
       </div>
       <span class="dragndrop-ico"></span>
       <span class="trash-ico hide"></span>

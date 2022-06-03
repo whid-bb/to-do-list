@@ -174,3 +174,18 @@
     font-size: 1rem;
   }
 }
+
+.list-desc-container {
+  width: 100%;
+  position: relative;
+
+  .edit-item-prompt {
+    position: absolute;
+    font-size: 14px;
+    font-style: italic;
+    color: #fff;
+    top: -17px;
+    pointer-events: none;
+    left: 0;
+  }
+}
