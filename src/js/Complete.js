@@ -9,10 +9,11 @@ class Complete {
 
   clearCompleted = () => {
     const completed = [...document.querySelectorAll(`.${globals.TASK_LIST_ITEM}`)];
-    completed.filter((el, i, arr) => {
+    completed.filter((el) => {
       if (el.classList.contains(globals.TASK_LIST_COMPLETED)) {
         this.RemoveItems.removeItem(el);
       }
+      return el;
     });
   };
 
