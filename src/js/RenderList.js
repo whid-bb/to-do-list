@@ -38,7 +38,7 @@ class RenderList extends Ls {
     this.list.push({
       index: this.list.length,
       desc: text,
-      completed: 0,
+      completed: false,
     });
     this.addToLS(this.list);
     this.renderTemplate(this.list.at(-1));

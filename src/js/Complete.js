@@ -8,9 +8,11 @@ class Complete {
   RemoveItems = new RemoveItems();
 
   clearCompleted = () => {
-    const completed = document.querySelectorAll(`.${globals.TASK_LIST_COMPLETED}`);
-    completed.forEach((el) => {
-      this.RemoveItems.removeItem(el);
+    const completed = [...document.querySelectorAll(`.${globals.TASK_LIST_ITEM}`)];
+    completed.filter((el, i, arr) => {
+      if (el.classList.contains(globals.TASK_LIST_COMPLETED)) {
+        this.RemoveItems.removeItem(el);
+      }
     });
   };
 
@@ -18,12 +20,12 @@ class Complete {
     const list = this.Ls.getFromLS();
     list.map((el) => {
       if (Number(id) === el.index) {
-        if (el.completed === 1) {
+        if (el.completed === true) {
           parent.classList.remove(globals.TASK_LIST_COMPLETED);
-          el.completed = 0;
+          el.completed = false;
         } else {
           parent.classList.add(globals.TASK_LIST_COMPLETED);
-          el.completed = 1;
+          el.completed = true;
         }
       }
       return el;
