@@ -66,7 +66,6 @@ class ListItem extends Ls {
     checkbox.addEventListener('change', () => {
       this.Complete.taskComplete(listItem, id);
     });
-
   };
 
   listItemEvents = (list) => {

@@ -18,7 +18,6 @@ class Complete {
     const list = this.Ls.getFromLS();
     list.map((el) => {
       if (Number(id) === el.index) {
-
         if (el.completed === 1) {
           parent.classList.remove(globals.TASK_LIST_COMPLETED);
           el.completed = 0;

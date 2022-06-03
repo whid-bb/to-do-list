@@ -7,7 +7,6 @@ class RemoveItems extends Ls {
     const listItems = [...document.querySelectorAll('.task-list-item')];
     const listReverse = listItems.reverse();
 
-
     for (let i = 0; i <= listReverse.length - 1; i += 1) {
       this.list[i].index = i;
       listReverse[i].id = `task-${i}`;
