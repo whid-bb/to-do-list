@@ -16,7 +16,6 @@ class ListItem extends Ls {
   };
 
   edit = (e) => {
-    // const list = this.getFromLS()
     const numId = e.currentTarget.id.replace('task-', '');
 
     const dragIco = e.currentTarget.querySelector('.dragndrop-ico');
@@ -27,7 +26,6 @@ class ListItem extends Ls {
     trashIco.currentParentId = numId;
     trashIco.addEventListener('click', (e) => {
       this.RemoveItems.removeItem(e.target);
-      // this.RemoveItems.recalculateIndexes();
     });
     if (e.target.classList.contains('list-desc')) {
       e.currentTarget.style.backgroundColor = '#ccc';
