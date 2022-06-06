@@ -8,6 +8,10 @@ Simple To Do List to remember about your daily tasks
 - CSS
 - Javascript
 
+## LIVE DEMO
+
+[live demo link](https://whid-bb.github.io/to-do-list/)
+
 ## Getting Started
 
 To build run in your terminal:
