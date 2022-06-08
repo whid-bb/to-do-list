@@ -43,5 +43,21 @@ describe('add remove functionality', () => {
 
       expect(elemId).toHaveLength(1);
     });
+    it('Remove element from DOM/LocalStorage', () => {
+      removeItem.list = testObj;
+      const removeBtn = document.querySelectorAll(`.trash-ico`)[0];
+      removeItem.removeItem(removeBtn);
+      const removedEl = document.querySelectorAll(`task-${testObj.index}`);
+
+      expect(removedEl).toHaveLength(0);
+      expect(locStorage.getFromLS()).toHaveLength(0);
+    });
+
+    it('Add one element to LocalStorage', () => {
+      locStorage.addToLS(testObj);
+
+      expect(localStorage.getItem(globals.LS_KEY)).toBe(JSON.stringify(testObj));
+
+    });
   });
 });
