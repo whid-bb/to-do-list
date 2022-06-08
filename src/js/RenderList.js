@@ -31,7 +31,6 @@ class RenderList extends Ls {
     </li>
     `;
     this.listTags.insertAdjacentHTML('afterend', html);
-
   };
 
   renderOne = (text) => {

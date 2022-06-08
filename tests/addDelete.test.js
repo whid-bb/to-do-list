@@ -11,7 +11,6 @@ const renderTemplate = new RenderList('#add-task-li');
 const locStorage = new Ls();
 
 describe('add remove functionality', () => {
-
   document.body.innerHTML = `
   <ul id="todo_list">
   <li id="add-task-li">
@@ -28,7 +27,7 @@ describe('add remove functionality', () => {
   const testObj = {
     index: 0,
     desc: 'testing',
-    completed: false
+    completed: false,
   };
 
   beforeEach(() => {
@@ -45,7 +44,7 @@ describe('add remove functionality', () => {
     });
     it('Remove element from DOM/LocalStorage', () => {
       removeItem.list = testObj;
-      const removeBtn = document.querySelectorAll(`.trash-ico`)[0];
+      const removeBtn = document.querySelectorAll('.trash-ico')[0];
       removeItem.removeItem(removeBtn);
       const removedEl = document.querySelectorAll(`task-${testObj.index}`);
 
@@ -57,7 +56,6 @@ describe('add remove functionality', () => {
       locStorage.addToLS(testObj);
 
       expect(localStorage.getItem(globals.LS_KEY)).toBe(JSON.stringify(testObj));
-
     });
   });
 });
