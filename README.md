@@ -8,6 +8,10 @@ Simple To Do List to remember about your daily tasks
 - CSS
 - Javascript
 
+## Screenshot
+<img src="https://user-images.githubusercontent.com/59011105/172654142-f8e3d786-6e5c-44d1-879f-b86accff24bb.png" width=50%>
+
+
 ## LIVE DEMO
 
 [live demo link](https://whid-bb.github.io/to-do-list/)
