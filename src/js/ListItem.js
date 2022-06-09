@@ -9,22 +9,41 @@ class ListItem extends Ls {
 
   RemoveItems = new RemoveItems();
 
+  dragIco;
+
+  trashIco;
+
   toggleIcons = (cls, ...ico) => {
     ico.forEach((el) => {
       el.classList.toggle(cls);
     });
   };
 
+  editListDesc = (element, list, elId) => {
+    element.currentTarget.style.backgroundColor = 'unset';
+    const descText = element.target.value;
+    list.map((el) => {
+      if (el.index === Number(elId)) {
+        el.desc = descText;
+      }
+      return el;
+    });
+
+    element.target.parentNode.innerHTML = `<span class="list-desc">${descText}</span>`;
+    this.addToLS(list);
+    this.toggleIcons('hide', this.dragIco, this.trashIco);
+  };
+
   edit = (e) => {
     const numId = e.currentTarget.id.replace('task-', '');
 
-    const dragIco = e.currentTarget.querySelector('.dragndrop-ico');
-    const trashIco = e.currentTarget.querySelector('.trash-ico');
+    this.dragIco = e.currentTarget.querySelector('.dragndrop-ico');
+    this.trashIco = e.currentTarget.querySelector('.trash-ico');
     this.list = this.getFromLS();
 
-    trashIco.currentParentEl = e.currentTarget;
-    trashIco.currentParentId = numId;
-    trashIco.addEventListener('click', (e) => {
+    this.trashIco.currentParentEl = e.currentTarget;
+    this.trashIco.currentParentId = numId;
+    this.trashIco.addEventListener('click', (e) => {
       this.RemoveItems.removeItem(e.target);
     });
     if (e.target.classList.contains('list-desc')) {
@@ -38,22 +57,11 @@ class ListItem extends Ls {
       const endOfText = tempInput.value.length;
       tempInput.setSelectionRange(endOfText, endOfText);
       tempInput.focus();
-      this.toggleIcons('hide', dragIco, trashIco);
+      this.toggleIcons('hide', this.dragIco, this.trashIco);
     }
 
     if (e.target.classList.contains('list-desc-edit')) {
-      e.currentTarget.style.backgroundColor = 'unset';
-      const descText = e.target.value;
-      this.list.map((el) => {
-        if (el.index === Number(numId)) {
-          el.desc = descText;
-        }
-        return el;
-      });
-
-      e.target.parentNode.innerHTML = `<span class="list-desc">${descText}</span>`;
-      this.addToLS(this.list);
-      this.toggleIcons('hide', dragIco, trashIco);
+      this.editListDesc(e, this.list, numId);
     }
   };
 
