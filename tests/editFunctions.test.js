@@ -82,4 +82,38 @@ describe('add remove functionality', () => {
       expect(LsTest2[itemIndex].completed).toBe(false);
     });
   });
+  describe('Clear All Completed Tasks', () => {
+    it('All completed deleted from DOM/LocalStorage?', () => {
+      const itemOneIndex = renderTemplate.renderOne('testing7');
+      renderTemplate.renderOne('testing8');
+      const itemThreeIndex = renderTemplate.renderOne('testing9');
+
+      const getFirstRender = document.getElementById(`task-${itemOneIndex}`);
+      const getThirdRender = document.getElementById(`task-${itemThreeIndex}`);
+
+      const checkboxFirst = getFirstRender.querySelector('.tdl-checkbox');
+      const checkboxThird = getThirdRender.querySelector('.tdl-checkbox');
+
+      checkboxFirst.click();
+      checkboxThird.click();
+
+      complete.clearCompleted(renderTemplate.list);
+      const LsTest = JSON.parse(localStorage.getItem(globals.LS_KEY));
+      const deletedElements = LsTest.filter((el) => {
+        if (el.desc === 'testing7' || el.desc === 'testing9') {
+          return el;
+        }
+        return null;
+      });
+      const existingElement = LsTest.filter((el) => {
+        if (el.desc === 'testing8') {
+          return el;
+        }
+        return null;
+      });
+
+      expect(deletedElements).toHaveLength(0);
+      expect(existingElement).toHaveLength(1);
+    });
+  });
 });
