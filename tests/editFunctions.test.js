@@ -28,7 +28,6 @@ describe('add remove functionality', () => {
     </div>
    `;
 
-
   const list = [
 
   ];
