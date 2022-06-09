@@ -36,8 +36,7 @@ class ToDoList {
     const clearBtn = document.querySelector('#clear-all button');
 
     clearBtn.addEventListener('click', () => {
-      const list = this.Ls.getFromLS();
-      this.Complete.clearCompleted(list);
+      this.Complete.clearCompleted();
     });
   };
 }
