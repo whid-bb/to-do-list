@@ -35,22 +35,24 @@ class RenderList extends Ls {
 
   renderOne = (text) => {
     this.list = this.getFromLS();
+    const newId = this.list.length;
     this.list.push({
-      index: this.list.length,
+      index: newId,
       desc: text,
       completed: false,
     });
     this.addToLS(this.list);
-    this.renderTemplate(this.list.at(-1));
+    this.renderTemplate(this.list[this.list.length - 1]);
 
-    const lastInsertId = this.list.at(-1).index;
+    const lastInsertId = this.list[this.list.length - 1].index;
     this.ListItem.listItemEvent(this.list, lastInsertId);
+
+    return newId;
   };
 
   renderMany = () => {
     this.list = this.getFromLS();
     const { list } = this;
-
     if (list.length === 0) return;
     list.forEach((el) => {
       this.renderTemplate(el);

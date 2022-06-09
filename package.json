@@ -7,8 +7,10 @@
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --config webpack.config.js --watch",
     "start": "webpack serve --config webpack.config.js ",
-    "test": "jest",
-    "watch-test": "jest --watch"
+    "test": "jest editFunctions.test.js --watch",
+    "watch-jest": "jest --watch",
+    "watch-add": "jest addDelete.test.js --watch",
+    "watch-edit": "jest editFunctions.test.js --watch"
   },
   "repository": {
     "type": "git",

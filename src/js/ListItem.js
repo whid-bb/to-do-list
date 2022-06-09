@@ -19,7 +19,7 @@ class ListItem extends Ls {
     });
   };
 
-  editListDesc = (element, list, elId) => {
+  saveListDescription = (element, list, elId) => {
     element.currentTarget.style.backgroundColor = 'unset';
     const descText = element.target.value;
     list.map((el) => {
@@ -31,6 +31,20 @@ class ListItem extends Ls {
 
     element.target.parentNode.innerHTML = `<span class="list-desc">${descText}</span>`;
     this.addToLS(list);
+    this.toggleIcons('hide', this.dragIco, this.trashIco);
+  };
+
+  editListDescription = (element) => {
+    element.currentTarget.style.backgroundColor = '#ccc';
+    const descText = element.target.innerText;
+    element.target.parentNode.innerHTML = `<input type='text' class='list-desc-edit' value='${descText}'>
+    <span class="edit-item-prompt">Click input to save</span>
+    `;
+
+    const tempInput = element.currentTarget.querySelector('.list-desc-edit');
+    const endOfText = tempInput.value.length;
+    tempInput.setSelectionRange(endOfText, endOfText);
+    tempInput.focus();
     this.toggleIcons('hide', this.dragIco, this.trashIco);
   };
 
@@ -47,21 +61,11 @@ class ListItem extends Ls {
       this.RemoveItems.removeItem(e.target);
     });
     if (e.target.classList.contains('list-desc')) {
-      e.currentTarget.style.backgroundColor = '#ccc';
-      const descText = e.target.innerText;
-      e.target.parentNode.innerHTML = `<input type='text' class='list-desc-edit' value='${descText}'>
-      <span class="edit-item-prompt">Click input to save</span>
-      `;
-
-      const tempInput = e.currentTarget.querySelector('.list-desc-edit');
-      const endOfText = tempInput.value.length;
-      tempInput.setSelectionRange(endOfText, endOfText);
-      tempInput.focus();
-      this.toggleIcons('hide', this.dragIco, this.trashIco);
+      this.editListDescription(e);
     }
 
     if (e.target.classList.contains('list-desc-edit')) {
-      this.editListDesc(e, this.list, numId);
+      this.saveListDescription(e, this.list, numId);
     }
   };
 
