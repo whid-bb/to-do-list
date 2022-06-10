@@ -1,5 +1,4 @@
 # To Do List
-
 Simple To Do List to remember about your daily tasks
 
 ## Built With
